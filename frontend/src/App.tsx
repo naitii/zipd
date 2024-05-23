@@ -11,7 +11,6 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
-      <Header/>
       <RouterProvider router={router}/>
       <div className="flex flex-col mt-20 items-center gap-3 font-semibold">
         <h1 className="text-5xl lowercase">
