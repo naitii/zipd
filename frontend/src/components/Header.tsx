@@ -1,4 +1,5 @@
 import { ModeToggle } from './mode-toggle'
+import { Button } from './ui/button'
 
 function Header() {
   return (
@@ -9,9 +10,9 @@ function Header() {
         </h2>
       </div>
       <div className='auth-buttons flex gap-5'>
+        <Button variant={"link"} className='btn font-medium text-lg '>Log In</Button>
+        <Button variant={"secondary"} className='btn font-medium text-lg '>Sign Up</Button>
         <ModeToggle />
-        <button className='btn font-medium text-lg '>Log In</button>
-        <button className='btn font-medium text-lg '>Sign Up</button>
       </div>
     </header>
   )
