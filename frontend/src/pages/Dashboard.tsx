@@ -1,13 +1,11 @@
 import Chart from "@/components/Dashboard/Chart";
 import TopLinks from "@/components/Dashboard/TopLinks";
-import Header from "@/components/Header";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, Link, MousePointerClickIcon } from "lucide-react";
 
 const Dashboard = () => {
   return (
     <>
-    {/* <Header/> */}
     <div className="mt-10 ml-4 mr-4 mb-10 p-4">
       <h1
         className=" font-semibold text-3xl
