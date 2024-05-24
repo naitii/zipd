@@ -1,4 +1,3 @@
-import { FormSchema } from '@/Pages/Auth'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -10,6 +9,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { FormSchema } from '@/validation/Auth'
 import { SubmitHandler, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -57,7 +57,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ form, onSubmit }) => {
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+
+        <Button type='submit'>Get in</Button>
       </form>
     </Form>
   )
