@@ -5,20 +5,7 @@ import { z } from 'zod'
 import { useToast } from '@/components/ui/use-toast'
 import AuthForm from '@/components/Auth/AuthForm'
 import { Card, CardDescription, CardHeader } from '@/components/ui/card'
-
-export const FormSchema = z.object({
-  email: z
-    .string()
-    .min(2, {
-      message: 'Username must be at least 2 characters.',
-    })
-    .regex(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, {
-      message: 'Enter Valid Email',
-    }),
-  password: z.string().min(6, {
-    message: 'Password must be at least 6 characters.',
-  }),
-})
+import { FormSchema } from '@/validation/Auth'
 
 export default function Auth() {
   const { toast } = useToast()
@@ -46,7 +33,7 @@ export default function Auth() {
     <div className='flex justify-center mt-20'>
       <Card className='lg:w-[600px] md:w-[500px] sm:w-[400px] w-[300px]'>
         <CardHeader>
-          <h2>Get in and Start zipping your URLs</h2>
+          <h2>Get in to shorten your URLs</h2>
         </CardHeader>
         <CardDescription>
           <AuthForm form={form} onSubmit={onSubmit} />
