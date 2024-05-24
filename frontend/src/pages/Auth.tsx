@@ -6,6 +6,8 @@ import { useToast } from '@/components/ui/use-toast'
 import AuthForm from '@/components/Auth/AuthForm'
 import { Card, CardDescription, CardHeader } from '@/components/ui/card'
 import { FormSchema } from '@/validation/Auth'
+import Header from '@/components/Header'
+
 
 export default function Auth() {
   const { toast } = useToast()
@@ -30,6 +32,8 @@ export default function Auth() {
   }
 
   return (
+    <>
+    <Header/>
     <div className='flex justify-center mt-20'>
       <Card className='lg:w-[600px] md:w-[500px] sm:w-[400px] w-[300px]'>
         <CardHeader>
@@ -40,5 +44,6 @@ export default function Auth() {
         </CardDescription>
       </Card>
     </div>
+    </>
   )
 }
