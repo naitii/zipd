@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  salt      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Url       Url[]
+
+  @@map("users")
+  @@index([email])
+}
+
+model Url {
+  id           Int            @id @default(autoincrement())
+  url          String
+  shortUrl     String         @unique
+  userId       Int
+  clickCount   Int            @default(0)
+  user         User           @relation(fields: [userId], references: [id])
+  UrlAnalytics UrlAnalytics[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([shortUrl])
+  @@map("urls")
+}
+
+model UrlAnalytics {
+  id          Int        @id @default(autoincrement())
+  urlId       Int
+  geo         GeoEnum?
+  referrer    String?
+  userAgent   String?
+  deviceType  DeviceEnum
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+  url         Url        @relation(fields: [urlId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([urlId])
+  @@map("url_analytics")
+}
+
+enum DeviceEnum {
+  MOBILE
+  TABLET
+  DESKTOP
+}
+
+enum GeoEnum {
+  AFRICA
+  ANTARCTICA
+  ASIA
+  EUROPE
+  NORTH_AMERICA
+  OCEANIA
+  SOUTH_AMERICA
+}
