@@ -1,3 +1,4 @@
 export const mutation = `#graphql
-    createUser(user: CreateUserInput!): ID!
+    createUser(user: AuthUserInput!): ID!
+    loginUser(user: AuthUserInput!): String!
 `

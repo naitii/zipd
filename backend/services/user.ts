@@ -17,6 +17,29 @@ class UserService {
       },
     })
   }
+
+  public static async loginUser(user: { user: z.infer<typeof userSchema> }) {
+    const { email, password } = user.user
+    const userRecord = await prismaClient.user.findUnique({
+      where: {
+        email: email,
+      },
+    })
+
+    if (!userRecord) {
+      throw new Error('User not found')
+    }
+
+    const hashedPwd = createHmac('sha512', userRecord.salt)
+      .update(password)
+      .digest('hex')
+
+    if (hashedPwd !== userRecord.password) {
+      throw new Error('Invalid password')
+    }
+
+    return 'Logged in'
+  }
 }
 
 export default UserService
