@@ -3,6 +3,11 @@ import { User } from './user'
 
 async function gqlServer() {
   const typeDefs = `
+    input CreateUserInput {
+        email: String!
+        password: String!
+    }
+
     type Query {
         hello: String
         ${User.queries}
