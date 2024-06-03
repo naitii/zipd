@@ -20,11 +20,7 @@ class UserService {
 
   public static async loginUser(user: { user: z.infer<typeof userSchema> }) {
     const { email, password } = user.user
-    const userRecord = await prismaClient.user.findUnique({
-      where: {
-        email: email,
-      },
-    })
+    const userRecord = await this.getUserByEmail(email)
 
     if (!userRecord) {
       throw new Error('User not found')
@@ -39,6 +35,24 @@ class UserService {
     }
 
     return 'Logged in'
+  }
+
+  public static async getUserByEmail(email: string) {
+    const userRecord = await prismaClient.user.findUnique({
+      where: {
+        email: email,
+      },
+    })
+    return userRecord
+  }
+
+  public static async checkUser(id: number) {
+    const userRecord = await prismaClient.user.findUnique({
+      where: {
+        id: id,
+      },
+    })
+    return userRecord ? true : false
   }
 }
 
