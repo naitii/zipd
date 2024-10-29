@@ -26,10 +26,10 @@ Chartjs.register(
 const GeoBar: React.FC = () => {
   const user = fakeData[0];
   
-  const [value, setValue] = React.useState("All");
+  const [, setValue] = React.useState("All");
 
   const dropDownArray = [{value: "All", label: "All"}];
-  user.User.Url.map((url) => {
+  user.users[0].urls.map((url) => {
     dropDownArray.push({value: url.shortUrl, label: url.shortUrl});
   });
 
@@ -44,10 +44,10 @@ const GeoBar: React.FC = () => {
      SOUTH_AMERICA: 0,
    },
  ];
-  user.User.Url.map((url) => {
-    url.UrlAnalytics.map((click)=>{
+  user.users[0].urls.map((url) => {
+    url.analytics.map((click) => {
       locations[0][click.geo] += 1;
-    })
+    });
   });
 
   const bardata = {
@@ -94,12 +94,12 @@ const GeoBar: React.FC = () => {
       },
     },
   };
-  const handleChoice = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChoice = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setValue(e.target.value);
     if (e.target.value === "All") {
       setData(bardata);
     }
-    user.User.Url.map((url) => {
+    user.users[0].urls.map((url) => {
       if (url.shortUrl === e.target.value) {
         const loc: { [key: string]: number }[] = [
           {
@@ -112,7 +112,7 @@ const GeoBar: React.FC = () => {
             SOUTH_AMERICA: 0,
           },
         ];
-        url.UrlAnalytics.map((click) => {
+        url.analytics.map((click) => {
           loc[0][click.geo] += 1;
         });
         const bardata1 = {

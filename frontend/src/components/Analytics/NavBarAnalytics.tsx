@@ -1,12 +1,11 @@
-import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GeoBar from './GeoBar';
 
 const NavBarAnalytics = () => {
   return (
     <div>
-      <Tabs defaultValue="geo">
-        <TabsList>
+      <Tabs defaultValue="geo" className='m-4'>
+        <TabsList className='flex'>
           <TabsTrigger value="geo">Geo-Analytics</TabsTrigger>
           <TabsTrigger value="refers">Referrals</TabsTrigger>
         </TabsList>
